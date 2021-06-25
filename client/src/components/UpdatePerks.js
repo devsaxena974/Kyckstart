@@ -2,9 +2,9 @@ import {React, useState, useEffect, useRef} from 'react'
 import { useAuth } from '../contexts/AuthContext'
 import { Link } from 'react-router-dom'
 
-const UpdateType = (props) => {
+const UpdatePerks = (props) => {
 
-    const [type, setType] = useState(props.type)
+    const [perks, setPerks] = useState(props.perks)
     const {currentUser} = useAuth()
     
     
@@ -12,9 +12,9 @@ const UpdateType = (props) => {
     async function onSubmit(e) {
         e.preventDefault()
         try {
-            const body = {type}
+            const body = {perks}
 
-            const response = await fetch("http://localhost:5000/businesses/editType/" + currentUser.email, {
+            const response = await fetch("http://localhost:5000/businesses/editPerks/" + currentUser.email, {
                 method: "PUT",
                 headers: { 'Content-Type': "application/json"},
                 body: JSON.stringify(body)
@@ -29,13 +29,16 @@ const UpdateType = (props) => {
         <div>
             <form>
                 <div>
-                    <label>Type</label>
-                    <input className="form-control w-100" type="text" value={type} onChange={e => setType(e.currentTarget.value)}/>
+                    <label>Membership Perks</label>
+                    <input className="form-control w-100" type="text" value={perks} onChange={e => setPerks(e.currentTarget.value)}/>
                 </div>
                 <button className="btn btn-success w-100 mt-3"onClick={onSubmit}>Update</button>
             </form>
+            {/* THis is where modal starts */}
+            
         </div>
+        
     )
 }
 
-export default UpdateType
+export default UpdatePerks

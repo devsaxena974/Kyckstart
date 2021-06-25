@@ -5,12 +5,11 @@ import { Link } from 'react-router-dom'
 import UpdateName from './UpdateName'
 import UpdateType from './UpdateType'
 import UpdateDescription from './UpdateDescription'
+import UpdatePrice from './UpdatePrice'
+import UpdatePerks from './UpdatePerks'
 
 const MyBusiness = () => {
     const [businesses, setBusinesses] = useState([])
-    const [showUpdateName, setShowUpdateName] = useState(false)
-    const [showUpdateType, setShowUpdateType] = useState(false)
-    const [showUpdateDescription, setShowUpdateDescription] = useState(false)
     const {currentUser} = useAuth()
 
     const getBusiness = async() => {
@@ -36,27 +35,155 @@ const MyBusiness = () => {
                 <div>
                     <div>
                         <h1 className="d-inline-flex">{business.name}</h1>
-                        <button className="d-inline btn btn-warning ml-2" onClick={e => setShowUpdateName(true)}>Update Business Name</button>
-                        {showUpdateName && <UpdateName name={businesses.name}/>}
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#nameModal">
+                            Update
+                        </button>
+                        <div class="modal" id="nameModal">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+
+                                
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Update Business Name</h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+
+                                
+                                <div class="modal-body">
+                                    <UpdateName name={business.name} />
+                                </div>
+
+                                
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                </div>
+
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div>
-                        <h3 className="d-inline">{business.type}</h3>
-                        <button className="d-inline-block btn btn-warning ml-2" onClick={e => setShowUpdateType(true)}>Update Business Type</button>
-                        {showUpdateType && <UpdateType name={businesses.type}/>}
+                        <p className="d-inline-flex"><strong>Type: </strong> {business.type}</p>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#typeModal">
+                            Update
+                        </button>
+                        <div class="modal" id="typeModal">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+
+                                
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Update Business Type</h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+
+                                
+                                <div class="modal-body">
+                                    <UpdateType type={business.type} />
+                                </div>
+
+                                
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                </div>
+
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <p>{business.address}, {business.city} {business.state}, {business.country}</p>
                     <div>
-                        <p className="d-inline">{business.description}</p>
-                        <button className="d-inline-block btn btn-warning ml-2" onClick={e => setShowUpdateDescription(true)}>Update Business Description</button>
-                        {showUpdateDescription && <UpdateDescription name={businesses.type}/>}
+                        <p className="d-inline-flex">{business.description}</p>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#descriptionModal">
+                            Update
+                        </button>
+                        <div class="modal" id="descriptionModal">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+
+                                
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Update Description</h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+
+                                
+                                <div class="modal-body">
+                                    <UpdateDescription description={business.description} />
+                                </div>
+
+                                
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <p className="d-inline-flex"><strong>Membership Price:</strong> ${business.member_price}</p>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#priceModal">
+                            Update
+                        </button>
+                        <div class="modal" id="priceModal">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+
+                                
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Update Membership Price</h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+
+                                
+                                <div class="modal-body">
+                                    <UpdatePrice price={business.member_price} />
+                                </div>
+
+                                
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <p className="d-inline-flex"><strong>Membership Perks:</strong> {business.member_perks}</p>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#perksModal">
+                            Update
+                        </button>
+                        <div class="modal" id="perksModal">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+
+                                
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Update Membership Perks</h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+
+                                
+                                <div class="modal-body">
+                                    <UpdatePerks perks={business.member_perks} />
+                                </div>
+
+                                
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                </div>
+
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                 </div>
             ))}
             
             <Link className="btn btn-primary mt-3" to="/">Home</Link>
-            <Link className="btn btn-warning mt-3 ml-2" to="/updatebusiness">Update</Link>
-            
         </div>
     )
 }

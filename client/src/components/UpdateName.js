@@ -28,16 +28,12 @@ const UpdateName = (props) => {
     return (
         <div>
             <form>
-                <h2 className="text-center mb-5 mt-5">Update</h2>
                 <div>
                     <label>Name</label>
                     <input className="form-control w-100" type="text" value={name} onChange={e => setName(e.currentTarget.value)}/>
                 </div>
                 <button className="btn btn-success w-100 mt-3"onClick={onSubmit}>Update</button>
             </form>
-            <div className="w-100 text-center mt-2">
-                <a href="/mybusiness">Cancel</a>
-            </div>
         </div>
     )
 }
