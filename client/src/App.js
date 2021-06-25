@@ -15,6 +15,7 @@ import PrivateRoute from './components/PrivateRoute';
 import ForgotPassword from './components/ForgotPassword';
 import UpdateProfile from './components/UpdateProfile';
 import MyBusiness from './components/MyBusiness';
+import UpdateName from './components/UpdateName';
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
               <PrivateRoute path="/update-profile" component={UpdateProfile} />
               <PrivateRoute path="/join" component={Join} />
               <PrivateRoute path="/mybusiness" component={MyBusiness} />
+              <PrivateRoute path="/updatebusiness" component={UpdateName} />
               <Route path="/signup" component={Signup} />
               <Route path="/login" component={Login} />
               <Route path="/forgot-password" component={ForgotPassword} />

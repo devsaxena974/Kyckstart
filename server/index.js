@@ -73,14 +73,49 @@ app.get("/businesses/:email", async(req, res) => {
     }
 })
 
-//update a business
+//update name
 
-app.put("/businesses/:id", async(req,res) => {
+app.put("/businesses/editName/:email", async(req,res) => {
     try {
         
-        const {id} = req.params
+        const {email} = req.params
         const {name} = req.body
-        const updateBusiness = await pool.query("UPDATE businesses SET name=$1 WHERE business_id=$2", [name, id])
+        const updateBusiness = await pool.query("UPDATE businesses SET name=$1 WHERE email=$2",
+        [name, email])
+
+        res.json("Business was updated")
+
+    } catch (error) {
+        console.error(error.message)
+    }
+})
+
+//update type
+
+app.put("/businesses/editType/:email", async(req,res) => {
+    try {
+        
+        const {email} = req.params
+        const {type} = req.body
+        const updateBusiness = await pool.query("UPDATE businesses SET type=$1 WHERE email=$2",
+        [type, email])
+
+        res.json("Business was updated")
+
+    } catch (error) {
+        console.error(error.message)
+    }
+})
+
+//update description
+
+app.put("/businesses/editDescription/:email", async(req,res) => {
+    try {
+        
+        const {email} = req.params
+        const {description} = req.body
+        const updateBusiness = await pool.query("UPDATE businesses SET description=$1 WHERE email=$2",
+        [description, email])
 
         res.json("Business was updated")
 
