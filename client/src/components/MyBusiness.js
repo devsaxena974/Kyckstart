@@ -28,12 +28,15 @@ const MyBusiness = () => {
         getBusiness()
     }, [])
 
+    
+
     return (
         <div className="container mt-5">
             {businesses.length === 0 && <h3>You have not enlisted a business with Kyckstart.</h3>}
             {businesses.map(business => (
                 <div>
                     <div>
+                        <img style={{width:"100%"}} src={business.image_path} />
                         <h1 className="d-inline-flex">{business.name}</h1>
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#nameModal">
                             Update

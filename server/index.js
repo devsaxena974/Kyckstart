@@ -2,10 +2,12 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const pool = require("./db");
+const fileUpload = require('express-fileupload')
 
 //middleware
 app.use(cors());
 app.use(express.json());//allows us to use request.body and get json data
+app.use(fileUpload())
 
 //ROUTES//
 
@@ -26,13 +28,44 @@ app.post("/businesses", async(req, res) => {
         const {description} = req.body
         const {member_price} = req.body
         const {member_perks} = req.body
+        const {imgPath} = req.body
        
-        const newBusiness = pool.query("INSERT INTO businesses (name, type, phone, address, city, state, country, email, description, member_price, member_perks) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)",
-         [name, type, phone, address, city, state, country, email, description, member_price, member_perks])
+        const newBusiness = pool.query(
+            "INSERT INTO businesses (name, type, phone, address, city, state, country, email, description, member_price, member_perks, image_path) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)",
+            [name, type, phone, address, city, state, country, email, description, member_price, member_perks, imgPath])
         
         // res.json(newBusiness.rows[0])
     } catch (error) {
         console.error(error.message);
+    }
+})
+
+//upload file
+
+app.post("/uploadImage", (req, res) => {
+    if(req.files === null) {
+        return res.json({ msg: 'No file was uploaded' })
+    }
+
+    const file = req.files.file;
+
+    file.mv(`C:/Users/Devanshu Saxena/kyckstart/client/public/uploads/${file.name}`, err => {
+        if(err) {
+            console.error(err)
+            return res.status(500).send();
+        }
+
+        return res.json({ fileName: file.name, filePath: `/uploads/${file.name}` })
+    })
+})
+
+//get image path:
+app.get("business/getImage/:email", async(req, res) => {
+    try {
+        const {email} = req.params
+        const query = await pool.query("SELECT image_path FROM businesses WHERE email=$1", [email])
+    } catch (error) {
+        console.error(error.message)
     }
 })
 
@@ -46,21 +79,6 @@ app.get("/businesses", async(req, res) => {
         console.error(error.message);
     }
 });
-
-//get a business
-
-// app.get("/businesses/:id", async(req,res) => {
-//     try {
-        
-//         const {id} = req.params
-//         const business = await pool.query("SELECT * FROM businesses WHERE business_id=$1", [id])
-        
-//         res.json(business.rows)
-
-//     } catch (error) {
-//         console.error(error.message)
-//     }
-// })
 
 //fetch a business via email
 
