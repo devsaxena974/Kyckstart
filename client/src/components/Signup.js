@@ -21,6 +21,15 @@ const Signup = (props) => {
             setError('')
             setLoading(true)
             await signup(emailRef.current.value, passwordRef.current.value)
+            let email = emailRef.current.value
+            const body = {email}
+
+            const response = await fetch("http://localhost:5000/newUser", {
+                method: "POST",
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(body)
+            })
+            console.log(response)
             props.history.push("/login")
         } catch (error) {
             setError("Failed to create an account")

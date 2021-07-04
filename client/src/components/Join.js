@@ -1,6 +1,7 @@
 import React, { Fragment, useState } from 'react'
 import { useAuth } from '../contexts/AuthContext'
 import { Link } from 'react-router-dom'
+import { Alert } from 'react-bootstrap'
 import axios from 'axios'
 
 
@@ -16,9 +17,13 @@ const Join = (props) => {
     const [description, setDesciption] = useState("")
     const [member_price, setMember_price] = useState("")
     const [member_perks, setMember_perks] = useState("")
+    const [user_type, setuser_type] = useState('basic_user')
     const [file, setFile] = useState('')
     const [filename, setFilename] = useState('Choose File')
     const [uploadedFile, setUploadedFile] = useState({})
+    const [uploadSuccess, setUploadSuccess] = useState()
+    const [uploadError, setUploadError] = useState(null)
+    const [message, setMessage] = useState('No File Uploaded')
     const {currentUser} = useAuth();
 
     const onChange = (e) => {
@@ -40,34 +45,41 @@ const Join = (props) => {
 
             const { fileName, filePath} = res.data
             setUploadedFile({ fileName, filePath })
+            setUploadSuccess(true)
+            setUploadError(false)
+            setMessage('File Uploaded Successfully')
         } catch (error) {
             if(error.response.status === 500) {
-                console.log('There was a problem with the server')
+                setUploadSuccess(false)
+                setMessage('Error uploading file')
             } else {
-                console.log(error.response.data.msg)
+                setUploadSuccess(false)
+                setMessage('Error uploading file')
             }
         }
     }
 
     const onSubmitForm = async (e) => {
+        e.preventDefault()
         const email = currentUser.email
         let imgPath = uploadedFile.filePath;
-        
-        // e.preventDefault()
         try {
             const body = { name, type, phone, address, city, state, country, email, description, member_price, member_perks, imgPath}
             
-            const response = await fetch("http://localhost:5000/businesses", {
+            const businessResponse = await fetch("http://localhost:5000/businesses", {
                 method: "POST",
                 headers: { "Content-Type": "application/json"},
                 body: JSON.stringify(body)
             })
+
+            console.log("business added")
             props.history.push("/")
         } catch (error) {
             console.error(error.message)
         }
-        
     }
+
+    
 
     return (
         <Fragment>
@@ -96,17 +108,12 @@ const Join = (props) => {
                     <h5>Member Perks (Free monthly coupons for groceries):</h5>
                     <input type="text" className="form-control" value={member_perks} onChange={e => setMember_perks(e.target.value)}></input>
                     <h5>Upload a picture that best represents your business: </h5>
-                    <div className="custom-file mb-4">
+                    <div className="custom-file mb-5">
                         <input className="form-control" type="file" id="formFile" onChange={onChange} />
-                        <button className="btn btn-primary btn-block mt-4 mb-3" onClick={onSubmitFile}>Upload</button>
+                        <button className="btn btn-primary btn-block mt-4 mb-5" onClick={onSubmitFile}>Upload</button>
                     </div>
-                    {uploadedFile ? (<div className="row mt-5">
-                        <div className="col-md-6 m-auto">
-                            <h3 className="text-center">{uploadedFile.fileName}</h3>
-                            <img style={{width: "100%"}}  src={uploadedFile.filePath} />
-                        </div>
-                    </div>) : null}
-                    
+                    {(uploadSuccess === true && uploadError === false) ? <div className="alert alert-success">{message}</div>:
+                        <div className="alert alert-danger">{message}</div>}
                     <button className="btn btn-success mt-3" onClick={onSubmitForm}>Add</button>
                     <Link className="btn btn-danger mt-3 ml-2" to="/">Cancel</Link>
                 </form>

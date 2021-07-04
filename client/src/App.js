@@ -16,6 +16,7 @@ import ForgotPassword from './components/ForgotPassword';
 import UpdateProfile from './components/UpdateProfile';
 import MyBusiness from './components/MyBusiness';
 import UpdateName from './components/UpdateName';
+import Business from './components/Business';
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
               <PrivateRoute path="/join" component={Join} />
               <PrivateRoute path="/mybusiness" component={MyBusiness} />
               <PrivateRoute path="/updatebusiness" component={UpdateName} />
+              <PrivateRoute path="/business/:name" component={Business} />
               <Route path="/signup" component={Signup} />
               <Route path="/login" component={Login} />
               <Route path="/forgot-password" component={ForgotPassword} />

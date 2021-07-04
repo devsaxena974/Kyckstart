@@ -11,7 +11,45 @@ app.use(fileUpload())
 
 //ROUTES//
 
+//post user and user_type on signup:
 
+app.post("/newUser", async(req,res) => {
+    try {
+        const {email} = req.body
+
+        let user_type="basic_user"
+        const addUser = await pool.query("INSERT INTO users (email, user_type) VALUES ($1, $2)", [email, user_type])
+
+        
+    } catch (error) {
+        console.error(error.message)
+    }
+})
+
+//get users:
+
+app.get("/users", async (req, res) => {
+    try {
+        const query = await pool.query("SELECT * FROM users;")
+
+        res.json(query.rows)
+    } catch (error) {
+        console.error(error.message)
+    }
+})
+
+//update a user type when business is added:
+
+app.put("/users/update/:email", async(req, res) => {
+    try {
+        const {email} = req.params
+        const {user_type} = req.body
+
+        const query = await pool.query("UPDATE users SET user_type=$1 WHERE email=$2", [user_type, email])
+    } catch (error) {
+        console.error(error.message)
+    }
+})
 
 //create a business
 
@@ -30,11 +68,14 @@ app.post("/businesses", async(req, res) => {
         const {member_perks} = req.body
         const {imgPath} = req.body
        
-        const newBusiness = pool.query(
+        const newBusiness = await pool.query(
             "INSERT INTO businesses (name, type, phone, address, city, state, country, email, description, member_price, member_perks, image_path) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)",
             [name, type, phone, address, city, state, country, email, description, member_price, member_perks, imgPath])
         
-        // res.json(newBusiness.rows[0])
+        res.json("business was created")
+        //post user type into users table:
+        // const user_type = 'business_owner'
+        // const newUser = pool.query("INSERT INTO users (email, type) VALUES ($1, $2)", [email, user_type])
     } catch (error) {
         console.error(error.message);
     }
