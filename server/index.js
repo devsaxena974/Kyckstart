@@ -11,6 +11,36 @@ app.use(fileUpload())
 
 //ROUTES//
 
+//MEMBERS TABLE
+
+app.post("/becomeMember/", async (req, res) => {
+    try {
+        const {email} = req.body
+        const {business} = req.body
+
+        const query = await pool.query("INSERT INTO members (email, business) VALUES ($1, $2)", [email, business])
+
+
+        res.json("business added to membership")
+    } catch (error) {
+        console.error(error.message)
+    }
+})
+
+//get all business that a user has membership for:
+
+app.get("/members/:email", async (req, res) => {
+    try {
+        const {email} = req.params
+
+        const query = await pool.query("SELECT * FROM members WHERE email=$1", [email])
+
+        res.json(query.rows)
+    } catch (error) {
+        console.log(error.message)
+    }
+})
+
 //post user and user_type on signup:
 
 app.post("/newUser", async(req,res) => {
@@ -28,9 +58,10 @@ app.post("/newUser", async(req,res) => {
 
 //get users:
 
-app.get("/users", async (req, res) => {
+app.get("/users/:email", async (req, res) => {
     try {
-        const query = await pool.query("SELECT * FROM users;")
+        const {email} = req.params
+        const query = await pool.query("SELECT user_type FROM users WHERE email=$1", [email])
 
         res.json(query.rows)
     } catch (error) {
@@ -40,16 +71,16 @@ app.get("/users", async (req, res) => {
 
 //update a user type when business is added:
 
-app.put("/users/update/:email", async(req, res) => {
-    try {
-        const {email} = req.params
-        const {user_type} = req.body
+// app.put("/users/update/:email", async(req, res) => {
+//     try {
+//         const {email} = req.params
+//         const {user_type} = req.body
 
-        const query = await pool.query("UPDATE users SET user_type=$1 WHERE email=$2", [user_type, email])
-    } catch (error) {
-        console.error(error.message)
-    }
-})
+//         const query = await pool.query("UPDATE users SET user_type=$1 WHERE email=$2", [user_type, email])
+//     } catch (error) {
+//         console.error(error.message)
+//     }
+// })
 
 //create a business
 
@@ -233,6 +264,7 @@ app.delete("/businesses/:id", async(req,res) => {
         console.error(error.message)
     }
 })
+
 
 app.listen(5000, () => {
     console.log("server has started on port 5000");
