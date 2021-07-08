@@ -12,6 +12,7 @@ const Home = (props) => {
     const [businesses, setBusinesses] = useState([])
     const [userType, setUserType] = useState([])
     const [revealMember, setRevealMember] = useState(false)
+    const [memberships, setMemberships] = useState([])
     const {currentUser, logout} = useAuth()
     const [error, setError] = useState('')
 
@@ -47,11 +48,6 @@ const Home = (props) => {
             setError('Failed to logout')
         }
     }
-
-    function refreshPage() {
-        window.location.reload(false)
-    }
-
     useEffect(() => {
         getBusinesses()
     }, [])//the [] makes useEffect only make one request for every time the component is rendered
@@ -59,6 +55,7 @@ const Home = (props) => {
     useEffect(() => {
         getUserType()
     }, [])
+
 
     return (
         <div className="justify-content-center position-absolute w-100 h-100 align-items-center align-content-center">
@@ -104,7 +101,7 @@ const Home = (props) => {
                                         </div>
 
                                         
-                                        <div className="modal-body">
+                                        <div className="modal-body" id={business.business_id}>
                                             <Business 
                                                 name={business.name} 
                                                 type={business.type}
@@ -119,9 +116,17 @@ const Home = (props) => {
                                                 member_price={business.member_price}
                                                 member_perks={business.member_perks} />
                                             
-                                            <button className="btn btn-primary" onClick={e => setRevealMember(true)}>Join {business.name}</button>
-                                            {userType.map(userType => (
-                                                revealMember && <BecomeMember name={business.name} user_type={userType.user_type} />))}
+                                            {/* {members.map(member => (
+                                                
+                                                (member === business.name) ? null:
+                                                (<div>
+                                                    <Business name={business.name} />
+                                                    <button className="btn btn-primary" />
+                                                </div>)
+                                            ))} */}
+                                            <div id={business.business_id}>
+                                                <BecomeMember name={business.name} />
+                                            </div>
                                         </div>
 
                                         

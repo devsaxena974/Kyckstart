@@ -29,11 +29,12 @@ app.post("/becomeMember/", async (req, res) => {
 
 //get all business that a user has membership for:
 
-app.get("/members/:email", async (req, res) => {
+app.get("/members/:email/:business", async (req, res) => {
     try {
         const {email} = req.params
+        const {business} = req.params
 
-        const query = await pool.query("SELECT * FROM members WHERE email=$1", [email])
+        const query = await pool.query("SELECT business FROM members WHERE email=$1 AND business=$2", [email, business])
 
         res.json(query.rows)
     } catch (error) {

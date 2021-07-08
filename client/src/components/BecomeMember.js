@@ -10,20 +10,19 @@ const BecomeMember = (props) => {
     const [showJoin, setShowJoin] = useState(true)
     const {currentUser} = useAuth()
 
+
     async function getMemberships() {
         const email = currentUser.email
+        const business = props.name
         try {
-            const response = await fetch("http://localhost:5000/members/" + email)
+            const response = await fetch(("http://localhost:5000/members/" + email + "/" + business))
             const data = await response.json()
 
             setMemberships(data)
-            memberships.map((members) => {
-                if(members.business === props.name) {
-                    setShowJoin(false) 
-                    return
-                } else {setShowJoin(true)}
-            })
-            console.log(showJoin)
+            console.log(data)
+            console.log(business)
+            
+            
         } catch (error) {
             console.log(error.message)
         }
@@ -55,19 +54,11 @@ const BecomeMember = (props) => {
         getMemberships()
     }, [])
 
+
+
     return (
         <div>
-            {props.name}
-            {/* {memberships.map(members => (
-                <div>
-                    {(members.business) === props.name ? 
-                        <p>You are already a member</p>
-                        : <button className="btn btn-primary" onClick={memberHandler}>Become a Member</button>
-                    }
-                </div>
-            ))} */}
-            {(showJoin) ? <button className="btn btn-primary" onClick={memberHandler}>Become a Member</button>: <p>Already a member</p>}
-            
+            {(memberships.length > 0) ? <p>Already a member</p> : <button className="btn btn-primary" onClick={memberHandler}>Become a Member</button>}
         </div>
     )
 }
