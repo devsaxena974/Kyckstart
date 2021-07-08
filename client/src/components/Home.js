@@ -65,6 +65,8 @@ const Home = (props) => {
                     <div>
                         {(userType.user_type === 'business_owner') ? <Link className="btn btn-primary float-right mt-3" to="/mybusiness">My Business</Link>:
                         null}
+                        {(userType.user_type === 'member') ? <Link className="btn btn-primary float-right mt-3" to="/memberships">Memberships</Link>:
+                        null}
                     </div>
                 ))}
             </div>
@@ -116,17 +118,13 @@ const Home = (props) => {
                                                 member_price={business.member_price}
                                                 member_perks={business.member_perks} />
                                             
-                                            {/* {members.map(member => (
-                                                
-                                                (member === business.name) ? null:
-                                                (<div>
-                                                    <Business name={business.name} />
-                                                    <button className="btn btn-primary" />
-                                                </div>)
-                                            ))} */}
-                                            <div id={business.business_id}>
-                                                <BecomeMember name={business.name} />
-                                            </div>
+                                            {userType.map(userType => (
+                                                ((userType.user_type === 'member') ?
+                                                <div id={business.business_id}>
+                                                    <BecomeMember name={business.name} />
+                                                </div> :
+                                                null )
+                                            ))}
                                         </div>
 
                                         

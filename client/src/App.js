@@ -17,6 +17,7 @@ import UpdateProfile from './components/UpdateProfile';
 import MyBusiness from './components/MyBusiness';
 import UpdateName from './components/UpdateName';
 import Business from './components/Business';
+import Memberships from './components/Memberships';
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
               <PrivateRoute path="/update-profile" component={UpdateProfile} />
               <PrivateRoute path="/join" component={Join} />
               <PrivateRoute path="/mybusiness" component={MyBusiness} />
+              <PrivateRoute path="/memberships" component={Memberships} />
               <PrivateRoute path="/updatebusiness" component={UpdateName} />
               <PrivateRoute path="/business/:name" component={Business} />
               <Route path="/signup" component={Signup} />

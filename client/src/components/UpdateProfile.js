@@ -39,8 +39,8 @@ const UpdateProfile = (props) => {
     }
 
     return (
-        <Fragment>
-            <form onSubmit={handleSubmit}>
+        <div className="d-flex flex-wrap justify-content-center position-absolute w-100 h-100 align-items-center align-content-center">
+            <form onSubmit={handleSubmit} className="form-control mt-5 mb-5">
                 <h2 className="text-center mb-4">Update Profile</h2>
                 {error && <h2>{error}</h2>}
                 <div id="email">
@@ -60,7 +60,7 @@ const UpdateProfile = (props) => {
             <div className="w-100 text-center mt-2">
                 <a href="/">Cancel</a>
             </div>
-        </Fragment>
+        </div>
     )
 }
 

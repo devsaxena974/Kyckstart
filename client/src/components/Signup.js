@@ -1,5 +1,8 @@
 import React, {Component, Fragment, useRef, useState} from 'react'
 import { useAuth } from '../contexts/AuthContext';
+import { Dropdown } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+
 
 
 const Signup = (props) => {
@@ -9,6 +12,7 @@ const Signup = (props) => {
     const {signup} = useAuth()
     const[error, setError] = useState()
     const [loading, setLoading] = useState(false)
+    const [formselect, setFormselect] = useState('basic_user')
 
     async function handleSubmit(e) {
         e.preventDefault()
@@ -22,20 +26,23 @@ const Signup = (props) => {
             setLoading(true)
             await signup(emailRef.current.value, passwordRef.current.value)
             let email = emailRef.current.value
-            const body = {email}
+            let user_type = formselect
+            const body = {email, user_type}
 
-            const response = await fetch("http://localhost:5000/newUser", {
+            const response = fetch("http://localhost:5000/newUser", {
                 method: "POST",
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(body)
             })
-            console.log(response)
-            props.history.push("/login")
+            
+            props.history.push("/")
         } catch (error) {
             setError("Failed to create an account")
         }
         setLoading(false)
     }
+
+    
 
     return (
         <div className="d-flex flex-wrap justify-content-center position-absolute w-100 h-100 align-items-center align-content-center">
@@ -53,6 +60,14 @@ const Signup = (props) => {
                 <div id="password-confirm">
                     <label>Password Confirmation</label>
                     <input className="form-control"  type="password" ref={passwordConfirmRef}/>
+                </div>
+                <div id="select-user_type" className="dropdown mt-2 mb-2">
+                    <label>Account Type</label>
+                    <select value={formselect} onChange={e => setFormselect(e.currentTarget.value)}>
+                        <option value="business_owner">Business Owner</option>
+                        <option value="member">Member</option>
+                        <option value="basic_user">Undecided (Regular User)</option>
+                    </select>
                 </div>
                 <button disabled={loading} className="btn btn-success w-100 mt-3" type="submit">Sign Up</button>
             </form>

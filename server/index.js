@@ -29,6 +29,19 @@ app.post("/becomeMember/", async (req, res) => {
 
 //get all business that a user has membership for:
 
+app.get("/members/:email", async (req, res) => {
+    try {
+        const {email} = req.params
+        const query = await pool.query("SELECT business FROM members WHERE email=$1", [email])
+
+        res.json(query.rows)
+    } catch (error) {
+        console.log(error.message)
+    }
+})
+
+//get a single business from email and business params:
+
 app.get("/members/:email/:business", async (req, res) => {
     try {
         const {email} = req.params
@@ -42,13 +55,25 @@ app.get("/members/:email/:business", async (req, res) => {
     }
 })
 
+app.delete("/deleteMembership/:email/:business", async (req, res) => {
+    try {
+        const {email} = req.params
+        const {business} = req.params
+
+        const query = await pool.query("DELETE FROM members WHERE email=$1 AND business=$2", [email, business])
+        res.json("Membership was deleted")
+    } catch (error) {
+        console.log(error.message)
+    }
+})
+
 //post user and user_type on signup:
 
 app.post("/newUser", async(req,res) => {
     try {
         const {email} = req.body
+        const {user_type} = req.body
 
-        let user_type="basic_user"
         const addUser = await pool.query("INSERT INTO users (email, user_type) VALUES ($1, $2)", [email, user_type])
 
         
