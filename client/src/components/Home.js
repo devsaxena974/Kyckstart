@@ -61,6 +61,9 @@ const Home = (props) => {
         <div className="justify-content-center position-absolute w-100 h-100 align-items-center align-content-center">
             <div className="mt-5 d-inline">
                 <strong className="float-left">{currentUser.email}</strong>
+                <div className="float-left mt-5 mb-5">
+                    <Link className="btn btn-primary" to="/browse">Browse</Link>
+                </div>
                 {userType.map(userType => (
                     <div>
                         {(userType.user_type === 'business_owner') ? <Link className="btn btn-primary float-right mt-3" to="/mybusiness">My Business</Link>:
@@ -148,7 +151,7 @@ const Home = (props) => {
             ))}
             {userType.map(userType => (
                     <div>
-                        {(userType.user_type === 'basic_user') ? <Footer />:
+                        {((userType.user_type === 'business_owner') || (userType.user_type === 'basic_user')) ? <Footer />:
                         null}
                     </div>
                 ))}

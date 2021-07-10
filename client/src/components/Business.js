@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Business = ({ type, description, rating, phone, address, city, state, country, image_path, member_price, member_perks }) => {
+const Business = ({ type, description, rating, phone, address, city, state, country, image_path }) => {
     return (
         <div className="mt-5 mb-5">
             <img style={{width:"100%"}} src={image_path} />
@@ -14,10 +14,6 @@ const Business = ({ type, description, rating, phone, address, city, state, coun
             <p>{city}, {state}</p>
             <p>{country}</p>
             <p>{phone}</p>
-            <h4>Membership Information</h4>
-            <p>Rating: {rating}/5</p>
-            <p>Member Perks: {member_perks}</p>
-            <p>Membership Price: {member_price}</p>
         </div>
     )
 }

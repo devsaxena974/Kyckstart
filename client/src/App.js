@@ -18,6 +18,7 @@ import MyBusiness from './components/MyBusiness';
 import UpdateName from './components/UpdateName';
 import Business from './components/Business';
 import Memberships from './components/Memberships';
+import Browse from './components/Browse';
 
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
               <PrivateRoute path="/mybusiness" component={MyBusiness} />
               <PrivateRoute path="/memberships" component={Memberships} />
               <PrivateRoute path="/updatebusiness" component={UpdateName} />
+              <PrivateRoute path="/browse" component={Browse} />
               <PrivateRoute path="/business/:name" component={Business} />
               <Route path="/signup" component={Signup} />
               <Route path="/login" component={Login} />

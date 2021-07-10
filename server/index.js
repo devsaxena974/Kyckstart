@@ -121,13 +121,11 @@ app.post("/businesses", async(req, res) => {
         const {country} = req.body
         const {email} = req.body
         const {description} = req.body
-        const {member_price} = req.body
-        const {member_perks} = req.body
         const {imgPath} = req.body
        
         const newBusiness = await pool.query(
-            "INSERT INTO businesses (name, type, phone, address, city, state, country, email, description, member_price, member_perks, image_path) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)",
-            [name, type, phone, address, city, state, country, email, description, member_price, member_perks, imgPath])
+            "INSERT INTO businesses (name, type, phone, address, city, state, country, email, description, image_path) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)",
+            [name, type, phone, address, city, state, country, email, description, imgPath])
         
         res.json("business was created")
         //post user type into users table:
@@ -234,40 +232,6 @@ app.put("/businesses/editDescription/:email", async(req,res) => {
         const {description} = req.body
         const updateBusiness = await pool.query("UPDATE businesses SET description=$1 WHERE email=$2",
         [description, email])
-
-        res.json("Business was updated")
-
-    } catch (error) {
-        console.error(error.message)
-    }
-})
-
-//update member price
-
-app.put("/businesses/editPrice/:email", async(req,res) => {
-    try {
-        
-        const {email} = req.params
-        const {price} = req.body
-        const updateBusiness = await pool.query("UPDATE businesses SET member_price=$1 WHERE email=$2",
-        [price, email])
-
-        res.json("Business was updated")
-
-    } catch (error) {
-        console.error(error.message)
-    }
-})
-
-//update member perks
-
-app.put("/businesses/editPerks/:email", async(req,res) => {
-    try {
-        
-        const {email} = req.params
-        const {perks} = req.body
-        const updateBusiness = await pool.query("UPDATE businesses SET member_perks=$1 WHERE email=$2",
-        [perks, email])
 
         res.json("Business was updated")
 

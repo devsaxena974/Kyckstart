@@ -15,8 +15,6 @@ const Join = (props) => {
     const [state, setState] = useState("")
     const [country, setCountry] = useState("")
     const [description, setDesciption] = useState("")
-    const [member_price, setMember_price] = useState("")
-    const [member_perks, setMember_perks] = useState("")
     const [user_type, setuser_type] = useState('basic_user')
     const [file, setFile] = useState('')
     const [filename, setFilename] = useState('Choose File')
@@ -64,7 +62,7 @@ const Join = (props) => {
         const email = currentUser.email
         let imgPath = uploadedFile.filePath;
         try {
-            const body = { name, type, phone, address, city, state, country, email, description, member_price, member_perks, imgPath}
+            const body = { name, type, phone, address, city, state, country, email, description, imgPath}
             
             const businessResponse = await fetch("http://localhost:5000/businesses", {
                 method: "POST",
@@ -103,10 +101,6 @@ const Join = (props) => {
                     <input type="text" className="form-control" value={state} onChange={e => setState(e.target.value)}></input>
                     <h5>Country:</h5>
                     <input type="text" className="form-control" value={country} onChange={e => setCountry(e.target.value)}></input>
-                    <h5>Member Price (ex: 7.99 or 19.00):</h5>
-                    <input type="text" className="form-control" value={member_price} onChange={e => setMember_price(e.target.value)}></input>
-                    <h5>Member Perks (Free monthly coupons for groceries):</h5>
-                    <input type="text" className="form-control" value={member_perks} onChange={e => setMember_perks(e.target.value)}></input>
                     <h5>Upload a picture that best represents your business: </h5>
                     <div className="custom-file mb-5">
                         <input className="form-control" type="file" id="formFile" onChange={onChange} />

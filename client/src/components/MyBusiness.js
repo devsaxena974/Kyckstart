@@ -5,8 +5,7 @@ import { Link } from 'react-router-dom'
 import UpdateName from './UpdateName'
 import UpdateType from './UpdateType'
 import UpdateDescription from './UpdateDescription'
-import UpdatePrice from './UpdatePrice'
-import UpdatePerks from './UpdatePerks'
+
 
 const MyBusiness = () => {
     const [businesses, setBusinesses] = useState([])
@@ -124,65 +123,6 @@ const MyBusiness = () => {
                             </div>
                         </div>
                     </div>
-                    <div>
-                        <p className="d-inline-flex"><strong>Membership Price:</strong> ${business.member_price}</p>
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#priceModal">
-                            Update
-                        </button>
-                        <div class="modal" id="priceModal">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-
-                                
-                                <div class="modal-header">
-                                    <h4 class="modal-title">Update Membership Price</h4>
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                </div>
-
-                                
-                                <div class="modal-body">
-                                    <UpdatePrice price={business.member_price} />
-                                </div>
-
-                                
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                </div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <p className="d-inline-flex"><strong>Membership Perks:</strong> {business.member_perks}</p>
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#perksModal">
-                            Update
-                        </button>
-                        <div class="modal" id="perksModal">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-
-                                
-                                <div class="modal-header">
-                                    <h4 class="modal-title">Update Membership Perks</h4>
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                </div>
-
-                                
-                                <div class="modal-body">
-                                    <UpdatePerks perks={business.member_perks} />
-                                </div>
-
-                                
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                </div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
             ))}
             
