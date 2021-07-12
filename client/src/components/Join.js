@@ -87,8 +87,20 @@ const Join = (props) => {
                     <h3>Add your business on Kyckstart</h3>
                     <h5>Business Name:</h5>
                     <input type="text" className="form-control" value={name} onChange={e => setName(e.target.value)}></input>
-                    <h5>Business Type:</h5>
-                    <input type="text" className="form-control" value={type} onChange={e => setType(e.target.value)}></input>
+                    <div className="dropdown mt-2 mb-2">
+                        <label>Business Type</label>
+                        <select value={type} onChange={e => setType(e.target.value)}>
+                            <option value="Tech">Tech</option>
+                            <option value="Retail">Retail</option>
+                            <option value="Finance">Finance</option>
+                            <option value="Pharmaceutical/Biotech">Pharmaceutical/Biotech</option>
+                            <option value="Food">Food</option>
+                            <option value="Grocery">Grocery</option>
+                            <option value="Law">Law</option>
+                            <option value="Insurance">Insurance</option>
+                            <option value="Barber">Barber</option>
+                        </select>
+                    </div>
                     <h5>Description:</h5>
                     <input type="text" className="form-control" value={description} onChange={e => setDesciption(e.target.value)}></input>
                     <h5>Contact Phone (ex: 012-345-6789):</h5>

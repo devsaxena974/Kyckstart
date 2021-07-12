@@ -23,9 +23,35 @@ const SearchBar = () => {
     function modal(business) {
         return (
             <div>
-                <button type="button" className="btn btn-primary" data-toggle="modal" data-target={"#" + business.business_id}>
-                    {business.name}
-                </button>
+                {/* <div>
+                    <table className="table mt-5 align-content-left">
+                        <tbody>
+                            <tr>
+                                <td><img className="h-5 w-25" src={business.image_path}></img></td>
+                                <td>
+                                    <button type="button" className="btn btn-primary" data-toggle="modal" data-target={"#" + business.business_id}>
+                                        {business.name}
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div> */}
+                <div className="container mt-5 mb-5">
+                    <div className="row">
+                        <div className="col-sm">
+                            <img className="h-10 w-50" src={business.image_path} />
+                        </div>
+                        <div className="col-sm">
+                            <button type="button" className="btn btn-primary" data-toggle="modal" data-target={"#" + business.business_id}>
+                                {business.name}
+                            </button>
+                        </div>
+                        <div className="col-sm">
+                            {business.description}
+                        </div>
+                    </div>
+                </div>
                 <div className="modal" id={business.business_id}>
                     <div className="modal-dialog">
                         <div className="modal-content">
@@ -51,16 +77,7 @@ const SearchBar = () => {
                                 country={business.country}
                                 member_price={business.member_price}
                                 member_perks={business.member_perks} />
-                            
-                            {/* {userType.map(userType => (
-                                ((userType.user_type === 'member') ?
-                                <div id={business.business_id}>
-                                    <BecomeMember name={business.name} />
-                                </div> :
-                                null )
-                            ))} */}
                         </div>
-
                         
                         <div className="modal-footer">
                             <button type="button" className="btn btn-danger" data-dismiss="modal">Close</button>
