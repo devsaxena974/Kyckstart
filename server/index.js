@@ -181,7 +181,7 @@ app.get("/businesses", async(req, res) => {
 app.get("/businesses/:email", async(req, res) => {
     try {
         const {email} = req.params
-        const getEmailBusiness = await pool.query("SELECT * FROM Businesses WHERE email=$1", [email])
+        const getEmailBusiness = await pool.query("SELECT * FROM businesses WHERE email=$1", [email])
 
         res.json(getEmailBusiness.rows)
     } catch (error) {
