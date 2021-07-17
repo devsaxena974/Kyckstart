@@ -9,7 +9,7 @@ const Footer = (props) => {
 
     const getBusinesses = async () => {
         try {
-            const response = await fetch("http://localhost:5000/businesses/")
+            const response = await fetch("http://localhost:5000/businesses/"+currentUser.email)
             const data = await response.json()
 
             setBusinesses(data)

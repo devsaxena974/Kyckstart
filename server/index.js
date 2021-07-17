@@ -40,6 +40,19 @@ app.get("/members/:email", async (req, res) => {
     }
 })
 
+//get all members that have subscribed to a business:
+
+app.get("/allMembers/:business", async (req, res) => {
+    try {
+        const {business} = req.params
+
+        const query = await pool.query("SELECT email FROM members WHERE business=$1", [business])
+        res.json(query.rows)
+    } catch (error) {
+        console.log(error.message)
+    }
+})
+
 //get a single business from email and business params:
 
 app.get("/members/:email/:business", async (req, res) => {

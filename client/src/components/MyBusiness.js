@@ -5,10 +5,13 @@ import { Link } from 'react-router-dom'
 import UpdateName from './UpdateName'
 import UpdateType from './UpdateType'
 import UpdateDescription from './UpdateDescription'
+import BusinessMembers from './BusinessMembers'
 
 
 const MyBusiness = () => {
     const [businesses, setBusinesses] = useState([])
+    const [currentBusiness, setCurrentBusiness] = useState([])
+    const [members, setMembers] = useState([])
     const {currentUser} = useAuth()
 
     const getBusiness = async() => {
@@ -18,13 +21,32 @@ const MyBusiness = () => {
             const jsonData = await response.json()
 
             setBusinesses(jsonData)
+            
         } catch (error) {
             console.error(error.message)
         }
     }
 
+
+    const getMembers = async() => {
+        try {
+            
+
+            const response = await fetch("http://localhost:5000/allMembers/" + currentBusiness)
+            const jsonData = await response.json()
+
+            setMembers(jsonData)
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
+
     useEffect(() => {
         getBusiness()
+    }, [])
+
+    useEffect(() => {
+        getMembers()
     }, [])
 
     
@@ -112,6 +134,34 @@ const MyBusiness = () => {
                                 
                                 <div class="modal-body">
                                     <UpdateDescription description={business.description} />
+                                </div>
+
+                                
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="members-list">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#membersModal">
+                            See All Members
+                        </button>
+                        <div class="modal" id="membersModal">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+
+                                
+                                <div class="modal-header">
+                                    <h4 class="modal-title">{business.name} Members</h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+
+                                
+                                <div class="modal-body">
+                                    <BusinessMembers business={business.name} />
                                 </div>
 
                                 
