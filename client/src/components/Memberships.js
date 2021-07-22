@@ -27,6 +27,11 @@ const Memberships = () => {
             })
 
             setMemberships(memberships.filter(membership=> membership.business !== business))
+
+            const response2 = await fetch(`http://localhost:5000/businesses/removeMembersByName/${business}`, {
+                method:"PUT",
+                headers: {'Content-Type': "application/json"}
+            })
         } catch (error) {
             console.log(error.message)
         }

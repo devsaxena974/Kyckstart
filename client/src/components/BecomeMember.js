@@ -5,9 +5,10 @@ import { useAuth } from '../contexts/AuthContext'
 const BecomeMember = (props) => {
     // BUSINESS OWNERS CAN NOT BE MEMBERS ON THE SAME ACCOUNT
     //YOU MUST CREATE A DIFFERENT ACCOUNT WITH ANOTHER EMAIL TO BECOME A MEMBER
-    const [becomeMember, setBecomeMember] = useState([])
+    const [numMembers, setNumMembers] = useState([])
+    const [currentNumber, setCurrentNumber] = useState(0)
     const [memberships, setMemberships] = useState([])
-    const [showJoin, setShowJoin] = useState(true)
+    const [updatedNumber, setUpdatedNumber] = useState(0)
     const {currentUser} = useAuth()
 
 
@@ -19,10 +20,21 @@ const BecomeMember = (props) => {
             const data = await response.json()
 
             setMemberships(data)
-            console.log(data)
-            console.log(business)
             
-            
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
+
+    //getting the business to see current number of members before updating
+    async function getBusinessMembers() {
+        const business = props.name
+        try {
+            const response = await fetch("http://localhost:5000/businesses/getMembersByName/"+business)
+            const numberOfMembers = await response.json()
+
+            setNumMembers(numberOfMembers)
+            console.log(numMembers)
         } catch (error) {
             console.log(error.message)
         }
@@ -33,7 +45,8 @@ const BecomeMember = (props) => {
         const email = currentUser.email
         let business = props.name
         const body = { email, business }
-        console.log(body)
+        
+        
         
         try {
             const response = await fetch(("http://localhost:5000/becomeMember/"), {
@@ -42,11 +55,19 @@ const BecomeMember = (props) => {
                 body: JSON.stringify(body)
             })
 
+            const response2 = await fetch(("http://localhost:5000/businesses/updateMembersByName/"+business), {
+                method: "PUT",
+                headers: {'Content_Type': "application/json"}
+            })
+            console.log(response2)
             
             window.location.reload()
         } catch (error) {
             console.error(error.message)
         }
+
+        //updating the number of members for a business
+
     }
 
     
@@ -54,11 +75,22 @@ const BecomeMember = (props) => {
         getMemberships()
     }, [])
 
+    useEffect(() => {
+        getBusinessMembers()
+    }, [])
+
 
 
     return (
         <div>
             {(memberships.length > 0) ? <p>Already a member</p> : <button className="btn btn-primary" onClick={memberHandler}>Become a Member</button>}
+            <div>
+                <strong>Number of Members:</strong>{numMembers.map(value => (
+                    <div>
+                        <p>{value.num_members}</p>
+                    </div>
+                ))}
+            </div>
         </div>
     )
 }

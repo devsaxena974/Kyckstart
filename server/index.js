@@ -189,6 +189,44 @@ app.get("/businesses", async(req, res) => {
     }
 });
 
+//get number of members in a business by name:
+app.get("/businesses/getMembersByName/:name", async(req, res) => {
+    try {
+        const {name} = req.params
+        const getBusinessByName = await pool.query("SELECT num_members FROM businesses WHERE name=$1", [name])
+        res.json(getBusinessByName.rows)
+    } catch (error) {
+        console.log(error.message)
+    }
+})
+
+//Update Members by business name:
+app.put("/businesses/updateMembersByName/:name", async(req, res) => {
+    try {
+        const {name} = req.params
+        const {updatedNumber} = req.body
+        
+
+        const updateNumMembers = await pool.query("UPDATE businesses SET num_members = num_members + 1 WHERE name=$1", [name])
+
+        res.json("Number of members was updated")
+    } catch (error) {
+        console.log(error.message)
+    }
+})
+
+//Decrease number of member when user cancels membership:
+app.put("/businesses/removeMembersByName/:name", async (req, res) => {
+    try {
+        const {name} = req.params
+
+        const query = await pool.query("UPDATE businesses SET num_members = num_members - 1 WHERE name = $1", [name])
+        res.json("Business # of members was updated successfully")
+    } catch (error) {
+        console.log(error.message)
+    }
+})
+
 //fetch a business via email
 
 app.get("/businesses/:email", async(req, res) => {

@@ -66,7 +66,6 @@ const Signup = (props) => {
                     <select value={formselect} onChange={e => setFormselect(e.currentTarget.value)}>
                         <option value="business_owner">Business Owner</option>
                         <option value="member">Member</option>
-                        <option value="basic_user">Undecided (Regular User)</option>
                     </select>
                 </div>
                 <button disabled={loading} className="btn btn-success w-100 mt-3" type="submit">Sign Up</button>
