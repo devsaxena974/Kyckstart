@@ -112,7 +112,7 @@ const FilterCategory = () => {
             })}
             </p>
             <div className="container mt-5">
-                <Link className="btn btn-primary" to="/">Home</Link>
+                <Link className="btn btn-success" to="/">Home</Link>
             </div>
         </div>
     )

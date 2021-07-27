@@ -63,20 +63,22 @@ const Home = (props) => {
     return (
         <div className="justify-content-center position-absolute w-100 h-100 align-items-center align-content-center">
             
+            <div className="d-flex justify-content-center">
+                <h1>Kyckstart</h1>
+            </div>
+            
                 
             {userType.map(userType => (
                 <Header user_type={userType.user_type} />
             ))}
-            
-            
+
             {businesses.map(business => (
             
                 <div key={business.business_id} className="card" style={{backgroundImage: `url(${business.image_path})`}}>
                     <div className="content">
-                        <p>{ business.name }</p>
-                        <p>{ business.type }</p>
-                        <p>{ business.rating }</p>
-                        <button type="button" className="btn btn-success" data-toggle="modal" data-target={"#" + business.business_id}>
+                        <p className="title float-left">{ business.name }</p>
+                        
+                        <button type="button" style={{fontSize:"120%"}} className="open btn btn-success float-right mr-2 mb-2" data-toggle="modal" data-target={"#" + business.business_id}>
                             Open
                         </button>
                         <div className="modal" id={business.business_id}>

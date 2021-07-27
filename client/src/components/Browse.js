@@ -9,11 +9,16 @@ const Browse = () => {
 
     return (
         <div>
-            <div className="d-flex flex-wrap justify-content-center position-absolute w-100 h-100 align-items-center align-content-center">
-                {(showSearch === false) ? <button className="btn btn-primary text-center" onClick={e => setShowSearch(true)}>Search for a Business</button>:null}
-                {(showSearch) ? <SearchBar /> : null}
-                
-                {(showSearch) ? null : <FilterCategory />}
+            <div className="d-flex justify-content-center w-100 h-100">
+                <div className="mr-4">
+                    {(showSearch === false) ? <button className="btn btn-primary text-center" onClick={e => setShowSearch(true)}>Search for a Business</button>:null}
+                </div>
+                <div>
+                    {(showSearch) ? <SearchBar /> : null}
+                </div>
+                <div>
+                    {(showSearch) ? null : <FilterCategory />}
+                </div>
             </div>
         </div>
     )

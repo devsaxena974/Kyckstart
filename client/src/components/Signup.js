@@ -3,6 +3,8 @@ import { useAuth } from '../contexts/AuthContext';
 import { Dropdown } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
+import About from './About';
+
 
 
 const Signup = (props) => {
@@ -47,7 +49,7 @@ const Signup = (props) => {
     return (
         <div className="d-flex flex-wrap justify-content-center position-absolute w-100 h-100 align-items-center align-content-center">
             <form onSubmit={handleSubmit}>
-                <h2 className="text-center mb-4">Sign Up</h2>
+                <h2 className="text-center mb-4">Kyckstart Sign Up</h2>
                 {error && <h2>{error}</h2>}
                 <div id="email">
                     <label>Email</label>
@@ -70,6 +72,9 @@ const Signup = (props) => {
                 </div>
                 <button disabled={loading} className="btn btn-success w-100 mt-3" type="submit">Sign Up</button>
             </form>
+            <div className="mt-4 text-center w-100">
+                <Link className="btn btn-primary" to="/about">About Kyckstart</Link>
+            </div>
             <div className="w-100 text-center mt-2">
                 Already have an account? <a href="/login">Login</a>
             </div>

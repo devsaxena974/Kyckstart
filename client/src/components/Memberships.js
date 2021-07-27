@@ -45,9 +45,9 @@ const Memberships = () => {
         <div className="container mt-5">
             <h1>Current Memberships</h1>
             {memberships.map(membership => (
-                <div className="d-inline-flex">
-                    <h4 className="float-left">{membership.business}</h4>
-                    <button className="btn btn-danger float-right" onClick={() => deleteMembership(membership.business)}>Cancel Membership</button>
+                <div className="mt-5">
+                    <h4 className="">{membership.business}</h4>
+                    <button className="btn btn-danger" onClick={() => deleteMembership(membership.business)}>Cancel Membership</button>
                 </div>
             ))}
             <div className="container mt-5">

@@ -2,6 +2,7 @@ import {React, useState, useEffect, Fragment} from 'react'
 import { Link } from 'react-router-dom'
 
 import Business from './Business'
+import BecomeMember from './BecomeMember'
 
 const SearchBar = () => {
 
@@ -23,20 +24,6 @@ const SearchBar = () => {
     function modal(business) {
         return (
             <div>
-                {/* <div>
-                    <table className="table mt-5 align-content-left">
-                        <tbody>
-                            <tr>
-                                <td><img className="h-5 w-25" src={business.image_path}></img></td>
-                                <td>
-                                    <button type="button" className="btn btn-primary" data-toggle="modal" data-target={"#" + business.business_id}>
-                                        {business.name}
-                                    </button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div> */}
                 <div className="container mt-5 mb-5">
                     <div className="row">
                         <div className="col-sm">
@@ -75,8 +62,8 @@ const SearchBar = () => {
                                 city={business.city}
                                 state={business.state}
                                 country={business.country}
-                                member_price={business.member_price}
-                                member_perks={business.member_perks} />
+                                num_members={business.num_members}/>
+                            <BecomeMember name={business.name} />
                         </div>
                         
                         <div className="modal-footer">
@@ -95,7 +82,9 @@ const SearchBar = () => {
     }, [])
 
     return (
-        <div className="justify-content-center position-absolute w-100 h-100 align-items-center align-content-center container">
+        <div className="justify-content-center w-100 h-100 align-items-center align-content-center container">
+            <button className="btn btn-primary mt-5 mb-5" onClick={e => window.location.reload()}>Back</button>
+            <Link className="btn btn-success mt-5 mb-5 ml-2" to="/">Home</Link>
             <input className="form-control w-100 mt-5 mb-5"type="text" placeholder="Search..." onChange={e => setSearchTerm(e.target.value)}/>
             <p className="text-center">
             {businesses.filter((business) => {
@@ -112,8 +101,6 @@ const SearchBar = () => {
                 )
             })}
             </p>
-            <button className="btn btn-primary mt-5 mb-5" onClick={e => window.location.reload()}>Back</button>
-            <Link className="btn btn-success mt-5 mb-5 ml-2" to="/">Home</Link>
         </div>
     )
 }

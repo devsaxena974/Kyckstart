@@ -38,9 +38,8 @@
 }
 
 .card {
-  transition: opacity 1s 0s ease-in-out;
   display: flex;
-  margin-top: 2%;
+  margin-top: 5%;
   margin-bottom: 2%;
   width: 60%;
   justify-content: center;
@@ -50,14 +49,28 @@
   background-size: cover;
 }
 
-.card:hover {
-  opacity: 0.5;
-}
-
 .card img {
   position: absolute;
   top: -50px;
   flex-shrink: 0;
   min-width: 100%;
   min-height: 100%;
+}
+
+.title {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  padding-left: 2%;
+  color: azure;
+  font-size: xx-large;
+}
+
+.open {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  font-size: 120%;
+  padding-bottom: 2%;
+  padding-right: 2%;
 }

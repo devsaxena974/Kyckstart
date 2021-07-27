@@ -1,5 +1,8 @@
 import React, {Fragment, useRef, useState} from 'react'
 import { useAuth } from '../contexts/AuthContext';
+import { Link } from 'react-router-dom';
+
+import About from './About';
 
 const Login = (props) => {
     const emailRef = useRef(null);
@@ -26,7 +29,7 @@ const Login = (props) => {
     return (
         <div className="d-flex flex-wrap justify-content-center position-absolute w-100 h-100 align-items-center align-content-center">
             <form onSubmit={handleSubmit}>
-                <h2 className="text-center mb-4">Login</h2>
+                <h2 className="text-center mb-4">Kyckstart Login</h2>
                 {error && <h2>{error}</h2>}
                 <div id="email">
                     <label>Email</label>
@@ -40,6 +43,9 @@ const Login = (props) => {
                     Login
                 </button>
             </form>
+            <div className="mt-4 text-center w-100">
+                <Link className="btn btn-primary" to="/about">About Kyckstart</Link>
+            </div>
             <div className="mt-5 text-center w-100">
                 <a href="/forgot-password">Forgot Password?</a>
             </div>
