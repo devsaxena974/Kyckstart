@@ -1,11 +1,13 @@
 import {React, useState, useEffect} from 'react'
 import { useAuth } from '../contexts/AuthContext'
 import { Link } from 'react-router-dom'
+import {BiPencil} from "react-icons/bi"
 
 import UpdateName from './UpdateName'
 import UpdateType from './UpdateType'
 import UpdateDescription from './UpdateDescription'
 import BusinessMembers from './BusinessMembers'
+import UpdateWebsite from './UpdateWebsite'
 
 
 const MyBusiness = () => {
@@ -41,6 +43,7 @@ const MyBusiness = () => {
         }
     }
 
+
     useEffect(() => {
         getBusiness()
     }, [])
@@ -59,9 +62,7 @@ const MyBusiness = () => {
                     <div>
                         <img style={{width:"100%"}} src={business.image_path} />
                         <h1 className="d-inline-flex">{business.name}</h1>
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#nameModal">
-                            Update
-                        </button>
+                        <BiPencil data-toggle="modal" data-target="#nameModal"></BiPencil>
                         <div class="modal" id="nameModal">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -87,23 +88,24 @@ const MyBusiness = () => {
                         </div>
                     </div>
                     <div>
-                        <p className="d-inline-flex"><strong>Type: </strong> {business.type}</p>
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#typeModal">
-                            Update
-                        </button>
-                        <div class="modal" id="typeModal">
+                        <p className="d-inline-flex"><strong>Type:</strong>  {business.type}</p>
+                    </div>
+                    <div>
+                        <a onClick={e => {window.open(`${business.website}`)}}>Website</a>
+                        <BiPencil data-toggle="modal" data-target="#websiteModal" />
+                        <div class="modal" id="websiteModal">
                             <div class="modal-dialog">
                                 <div class="modal-content">
 
                                 
                                 <div class="modal-header">
-                                    <h4 class="modal-title">Update Business Type</h4>
+                                    <h4 class="modal-title">Update Website</h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 </div>
 
                                 
                                 <div class="modal-body">
-                                    <UpdateType type={business.type} />
+                                    <UpdateWebsite website={business.website} />
                                 </div>
 
                                 
@@ -111,16 +113,14 @@ const MyBusiness = () => {
                                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                                 </div>
 
-                                </div>
                             </div>
+                        </div>
                         </div>
                     </div>
                     <p>{business.address}, {business.city} {business.state}, {business.country}</p>
                     <div>
                         <p className="d-inline-flex">{business.description}</p>
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#descriptionModal">
-                            Update
-                        </button>
+                        <BiPencil data-toggle="modal" data-target="#descriptionModal" />
                         <div class="modal" id="descriptionModal">
                             <div class="modal-dialog">
                                 <div class="modal-content">

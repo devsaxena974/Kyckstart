@@ -23,6 +23,7 @@ import Browse from './components/Browse';
 
 function App() {
   return (
+    <div className="mt-2 mb-5">
     <AuthProvider>
       <Router>
         <Fragment>
@@ -45,6 +46,7 @@ function App() {
         </Fragment>
       </Router>
     </AuthProvider>
+    </div>
   );
 }
 

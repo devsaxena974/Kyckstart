@@ -135,10 +135,11 @@ app.post("/businesses", async(req, res) => {
         const {email} = req.body
         const {description} = req.body
         const {imgPath} = req.body
+        const {website} = req.body
        
         const newBusiness = await pool.query(
-            "INSERT INTO businesses (name, type, phone, address, city, state, country, email, description, image_path) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)",
-            [name, type, phone, address, city, state, country, email, description, imgPath])
+            "INSERT INTO businesses (name, type, phone, address, city, state, country, email, description, image_path, website) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)",
+            [name, type, phone, address, city, state, country, email, description, imgPath, website])
         
         res.json("business was created")
         //post user type into users table:
@@ -182,7 +183,7 @@ app.get("business/getImage/:email", async(req, res) => {
 
 app.get("/businesses", async(req, res) => {
     try {
-        const allBusinesses = await pool.query("SELECT * FROM businesses");
+        const allBusinesses = await pool.query("SELECT * FROM businesses ORDER BY num_members DESC");
         res.json(allBusinesses.rows);
     } catch (error) {
         console.error(error.message);
@@ -282,6 +283,23 @@ app.put("/businesses/editDescription/:email", async(req,res) => {
         const {email} = req.params
         const {description} = req.body
         const updateBusiness = await pool.query("UPDATE businesses SET description=$1 WHERE email=$2",
+        [description, email])
+
+        res.json("Business was updated")
+
+    } catch (error) {
+        console.error(error.message)
+    }
+})
+
+//update website
+
+app.put("/businesses/editWebsite/:email", async(req,res) => {
+    try {
+        
+        const {email} = req.params
+        const {website} = req.body
+        const updateBusiness = await pool.query("UPDATE businesses SET website=$1 WHERE email=$2",
         [description, email])
 
         res.json("Business was updated")

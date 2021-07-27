@@ -1,11 +1,13 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
-const Business = ({ type, description, rating, phone, address, city, state, country, image_path }) => {
+const Business = ({ type, description, rating, phone, address, city, state, country, image_path, website }) => {
     return (
-        <div className="mt-5 mb-5">
-            <img style={{width:"100%"}} src={image_path} />
+        <div className="business">
+            <img style={{ position:"relative", top: "-40px", width:"100%"}} src={image_path} />
             <h3>{type}</h3>
             <p>{description}</p>
+            <button onClick={e=> {window.open(`${website}`)}}>Website</button>
             <br></br>
             <br></br>
             <br></br>

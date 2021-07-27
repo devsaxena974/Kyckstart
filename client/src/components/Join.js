@@ -15,6 +15,7 @@ const Join = (props) => {
     const [state, setState] = useState("")
     const [country, setCountry] = useState("")
     const [description, setDesciption] = useState("")
+    const [website, setWebsite] = useState("")
     const [user_type, setuser_type] = useState('basic_user')
     const [file, setFile] = useState('')
     const [filename, setFilename] = useState('Choose File')
@@ -62,7 +63,7 @@ const Join = (props) => {
         const email = currentUser.email
         let imgPath = uploadedFile.filePath;
         try {
-            const body = { name, type, phone, address, city, state, country, email, description, imgPath}
+            const body = { name, type, phone, address, city, state, country, email, description, imgPath, website}
             
             const businessResponse = await fetch("http://localhost:5000/businesses", {
                 method: "POST",
@@ -103,6 +104,8 @@ const Join = (props) => {
                     </div>
                     <h5>Description:</h5>
                     <input type="text" className="form-control" value={description} onChange={e => setDesciption(e.target.value)}></input>
+                    <h5>Website:</h5>
+                    <input type="text" className="form-control" value={website} onChange={e => setWebsite(e.target.value)}></input>
                     <h5>Contact Phone (ex: 012-345-6789):</h5>
                     <input type="text" className="form-control" value={phone} onChange={e => setPhone(e.target.value)}></input>
                     <h5>Address:</h5>
