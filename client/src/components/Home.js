@@ -128,11 +128,7 @@ const Home = (props) => {
                     </div>
                 </div>      
             ))}
-            {userType.map(userType => (
-                <div>
-                    <strong>{userType.user_type}</strong>
-                </div>
-            ))}
+            
             {userType.map(userType => (
                     <div>
                         {((userType.user_type === 'business_owner') || (userType.user_type === 'basic_user')) ? <Footer />:
