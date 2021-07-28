@@ -55,7 +55,7 @@ const BecomeMember = (props) => {
                 body: JSON.stringify(body)
             })
 
-            const response2 = await fetch(("http://localhost:5000/businesses/updateMembersByName/"+business), {
+            const response2 = await fetch(("http://localhost:5000/updateMembersByName/"+business), {
                 method: "PUT",
                 headers: {'Content_Type': "application/json"}
             })

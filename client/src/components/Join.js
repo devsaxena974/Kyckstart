@@ -119,11 +119,11 @@ const Join = (props) => {
                     <h5>Upload a picture that best represents your business: </h5>
                     <div className="custom-file mb-5">
                         <input className="form-control" type="file" id="formFile" onChange={onChange} />
-                        <button className="btn btn-primary btn-block mt-4 mb-5" onClick={onSubmitFile}>Upload</button>
+                        <button type="button" className="btn btn-primary btn-block mt-4 mb-5" onClick={onSubmitFile}>Upload</button>
                     </div>
                     {(uploadSuccess === true && uploadError === false) ? <div className="alert alert-success">{message}</div>:
                         <div className="alert alert-danger">{message}</div>}
-                    <button className="btn btn-success mt-3" onClick={onSubmitForm}>Add</button>
+                    <button className="btn btn-success mt-3" onClick={onSubmitForm} type="submit">Add</button>
                     <Link className="btn btn-danger mt-3 ml-2" to="/">Cancel</Link>
                 </form>
                 

@@ -35,6 +35,7 @@ const Home = (props) => {
             const response = await fetch("http://localhost:5000/users/"+currentUser.email)
             const data = await response.json()
 
+            console.log(data)
             setUserType(data)
         } catch (error) {
             console.error(error.message)
