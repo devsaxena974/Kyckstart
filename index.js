@@ -344,6 +344,6 @@ app.get("*", (req, res) => {
 })
 
 
-app.listen(PORT, () => {
+app.listen(PORT || 5000, () => {
     console.log(`server has started on port ${PORT}`);
 });
