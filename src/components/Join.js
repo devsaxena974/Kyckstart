@@ -36,7 +36,7 @@ const Join = (props) => {
         formData.append('file', file)
         //uploading the file:
         try {
-            const res = await axios.post(('http://localhost:5000/uploadImage/'), formData, {
+            const res = await axios.post(('https://kyckstart-server.herokuapp.com/uploadImage/'), formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
@@ -65,7 +65,7 @@ const Join = (props) => {
         try {
             const body = { name, type, phone, address, city, state, country, email, description, imgPath, website}
             
-            const businessResponse = await fetch("http://localhost:5000/businesses", {
+            const businessResponse = await fetch("https://kyckstart-server.herokuapp.com/businesses", {
                 method: "POST",
                 headers: { "Content-Type": "application/json"},
                 body: JSON.stringify(body)

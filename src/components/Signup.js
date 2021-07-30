@@ -31,7 +31,7 @@ const Signup = (props) => {
             let user_type = formselect
             const body = {email, user_type}
 
-            const response = fetch("http://localhost:5000/newUser", {
+            const response = fetch("https://kyckstart-server.herokuapp.com/newUser", {
                 method: "POST",
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(body)

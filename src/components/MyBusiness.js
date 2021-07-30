@@ -18,7 +18,7 @@ const MyBusiness = () => {
 
     const getBusiness = async() => {
         try {
-            const url = "http://localhost:5000/businesses/" + currentUser.email
+            const url = "https://kyckstart-server.herokuapp.com/businesses/" + currentUser.email
             const response = await fetch(url)
             const jsonData = await response.json()
 
@@ -34,7 +34,7 @@ const MyBusiness = () => {
         try {
             
 
-            const response = await fetch("http://localhost:5000/allMembers/" + currentBusiness)
+            const response = await fetch("https://kyckstart-server.herokuapp.com/allMembers/" + currentBusiness)
             const jsonData = await response.json()
 
             setMembers(jsonData)

@@ -11,7 +11,7 @@ const SearchBar = () => {
 
     async function getBusinesses() {
         try {
-            const response = await fetch("http://localhost:5000/businesses")
+            const response = await fetch("https://kyckstart-server.herokuapp.com/businesses")
             const data = await response.json()
 
             setBusinesses(data)

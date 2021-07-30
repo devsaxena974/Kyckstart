@@ -8,7 +8,7 @@ const Memberships = () => {
     const {currentUser} = useAuth()
 
     async function getMemberships() {
-        const url = "http://localhost:5000/members/" + currentUser.email
+        const url = "https://kyckstart-server.herokuapp.com/members/" + currentUser.email
         try {
             const response = await fetch(url)
             const data = await response.json()
@@ -22,13 +22,13 @@ const Memberships = () => {
 
     async function deleteMembership(business) {
         try {
-            const response = await fetch(`http://localhost:5000/deleteMembership/${currentUser.email}/${business}`, {
+            const response = await fetch(`https://kyckstart-server.herokuapp.com/deleteMembership/${currentUser.email}/${business}`, {
                 method: "DELETE"
             })
 
             setMemberships(memberships.filter(membership=> membership.business !== business))
 
-            const response2 = await fetch(`http://localhost:5000/businesses/removeMembersByName/${business}`, {
+            const response2 = await fetch(`https://kyckstart-server.herokuapp.com/businesses/removeMembersByName/${business}`, {
                 method:"PUT",
                 headers: {'Content-Type': "application/json"}
             })

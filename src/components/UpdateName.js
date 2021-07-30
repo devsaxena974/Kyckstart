@@ -14,7 +14,7 @@ const UpdateName = (props) => {
         try {
             const body = {name}
 
-            const response = await fetch("http://localhost:5000/businesses/editName/" + currentUser.email, {
+            const response = await fetch("https://kyckstart-server.herokuapp.com/businesses/editName/" + currentUser.email, {
                 method: "PUT",
                 headers: { 'Content-Type': "application/json"},
                 body: JSON.stringify(body)
