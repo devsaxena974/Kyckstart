@@ -1,6 +1,6 @@
 import React, {Fragment, useEffect, useState} from 'react'
 import { useAuth } from '../contexts/AuthContext'
-import { Link, Redirect } from 'react-router-dom'
+
 
 //components:
 import Footer from './Footer'

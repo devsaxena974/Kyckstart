@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+
 
 const Business = ({ type, description, rating, phone, address, city, state, country, image_path, website }) => {
     return (

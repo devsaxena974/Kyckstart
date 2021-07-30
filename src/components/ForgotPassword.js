@@ -1,6 +1,6 @@
 import React, {Fragment, useRef, useState} from 'react'
 import { useAuth } from '../contexts/AuthContext';
-import auth from './auth';
+
 
 
 const ForgotPassword = (props) => {
