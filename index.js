@@ -19,7 +19,7 @@ app.use(fileUpload())
 if(process.env.NODE_ENV === "production") {
     //serve static content
     //npm run build
-    app.use(express.static(path.join(__dirname, "client/")))
+    app.use(express.static("build"))
 }
 
 
