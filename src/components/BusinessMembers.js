@@ -7,7 +7,7 @@ const BusinessMembers = (props) => {
 
     async function getMembers() {
         try {
-            const url = "/allMembers/" + businessName
+            const url = "https://kyckstart-server.herokuapp.com/allMembers/" + businessName
 
             const response = await fetch(url)
             const data = await response.json()
