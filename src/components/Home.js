@@ -21,7 +21,7 @@ const Home = (props) => {
 
     const getBusinesses = async() => {
         try {
-            const response = await fetch("https://kyckstart-server.herokuapp.com/businesses")
+            const response = await fetch("/businesses")
             const jsonData = await response.json()
 
             setBusinesses(jsonData)
@@ -32,7 +32,7 @@ const Home = (props) => {
 
     const getUserType = async () => {
         try {
-            const response = await fetch("https://kyckstart-server.herokuapp.com/users/"+currentUser.email)
+            const response = await fetch("/users/"+currentUser.email)
             const data = await response.json()
 
             console.log(data)

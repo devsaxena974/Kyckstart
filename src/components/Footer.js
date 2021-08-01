@@ -9,7 +9,7 @@ const Footer = (props) => {
 
     const getBusinesses = async () => {
         try {
-            const response = await fetch("https://kyckstart-server.herokuapp.com/businesses/"+currentUser.email)
+            const response = await fetch("/businesses/"+currentUser.email)
             const data = await response.json()
 
             setBusinesses(data)

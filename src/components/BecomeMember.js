@@ -16,7 +16,7 @@ const BecomeMember = (props) => {
         const email = currentUser.email
         const business = props.name
         try {
-            const response = await fetch(("https://kyckstart-server.herokuapp.com/members/" + email + "/" + business))
+            const response = await fetch(("/members/" + email + "/" + business))
             const data = await response.json()
 
             setMemberships(data)
@@ -30,7 +30,7 @@ const BecomeMember = (props) => {
     async function getBusinessMembers() {
         const business = props.name
         try {
-            const response = await fetch("https://kyckstart-server.herokuapp.com/businesses/getMembersByName/"+business)
+            const response = await fetch("/businesses/getMembersByName/"+business)
             const numberOfMembers = await response.json()
 
             setNumMembers(numberOfMembers)
@@ -49,13 +49,13 @@ const BecomeMember = (props) => {
         
         
         try {
-            const response = await fetch(("https://kyckstart-server.herokuapp.com/becomeMember/"), {
+            const response = await fetch(("/becomeMember/"), {
                 method: "POST",
                 headers: {'Content-Type': "application/json"},
                 body: JSON.stringify(body)
             })
 
-            const response2 = await fetch(("https://kyckstart-server.herokuapp.com/updateMembersByName/"+business), {
+            const response2 = await fetch(("/updateMembersByName/"+business), {
                 method: "PUT",
                 headers: {'Content_Type': "application/json"}
             })
