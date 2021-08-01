@@ -19,6 +19,6 @@ const prodConfig = new Client({
 
 
 
-const pool = new Pool(devConfig)
+const pool = new Pool((process.env.NODE_ENV === "production") ? prodConfig : devConfig )
 
 module.exports = pool
