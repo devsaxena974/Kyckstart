@@ -19,13 +19,17 @@ app.use(fileUpload())
 if(process.env.NODE_ENV === "production") {
     //serve static content
     //npm run build
-    app.use(express.static("build"))
+    app.use(express.static(path.join(__dirname, "build")))
 }
 
 
 
 
 //ROUTES//
+
+app.get("/", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "build", "index.html"))
+})
 
 //MEMBERS TABLE
 

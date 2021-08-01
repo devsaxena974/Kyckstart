@@ -1,2 +1,2 @@
-"web: bin/boot"
+web: node index.js
 
